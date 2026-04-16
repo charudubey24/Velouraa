@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veloura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+  margin:0;
+  font-family: "Allura", cursive;
+  background:#63131C;
+  color:white;
+  font-size: large;
+}
+
+
+/* NAVBAR */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  background:#16202b;
+  height: 50px;
+  
+
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  
+}
+
+nav a{
+  margin:0 15px;
+  color:white;
+  text-decoration:none;
+  
+}
+
+/* SEARCH */
+.search-box{
+  display:flex;
+  background:white;
+  border-radius:30px;
+  padding:5px 10px;
+  margin-left:15px;
+}
+
+.search-box input{
+  border:none;
+  outline:none;
+  padding:8px;
+}
+
+.search-btn{
+  border:none;
+  color:white;
+  border-radius:50%;
+  padding:6px 10px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  height:90vh;
+  overflow:hidden;
+}
+
+.slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:1s;
+}
+
+.slide.active{
+  opacity:1;
+}
+
+/* GENDER */
+.gender{
+  display:flex;
+  gap:20px;
+  padding:60px;
+}
+
+.gender-card{
+  flex:1;
+  height:200px;
+  position:relative;
+  border-radius:15px;
+  overflow:hidden;
+  transition:0.4s;
+}
+
+.gender-card:hover{
+  transform:scale(1.05);
+}
+
+.gender-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(40%);
+}
+
+.gender-card h2{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* PRODUCTS */
+.products{
+  padding:40px;
+  text-align:center;
+}
+
+.product-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+}
+
+.card{
+  background:#16202b;
+  padding:15px;
+  width:180px;
+  border-radius:12px;
+  transition:0.4s;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.05);
+}
+
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+.btn {
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.btn-main {
+  background-color: #603A30;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-main:hover {
+  transform: scale(1.1);
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  padding:60px;
+}
+
+.grid-box{
+  position:relative;
+  height:200px;
+  transition:0.4s;
+}
+
+.grid-box:hover{
+  transform:scale(1.05);
+}
+
+.grid-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(70%);
+}
+
+.grid-box h3{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* SALE */
+.sale{
+  padding:60px;
+}
+
+.sale img{
+  width:100%;
+  border-radius:20px;
+  height: 350px;
+}
+
+/* SERVICES */
+.services{
+  padding:60px;
+  text-align:center;
+}
+
+.service-container{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.service-box{
+  background:#16202b;
+  padding:20px;
+  border-radius:10px;
+  width:200px;
+  transition:0.3s;
+}
+
+.service-box:hover{
+  transform:scale(1.1);
+}
+
+/* HELP */
+.helpdesk{
+  background:#F2E5C6;
+  color:black;
+  padding:60px;
+}
+
+.help-container{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.help-links{
+  display:grid;
+  grid-template-columns:repeat(2,200px);
+  gap:10px;
+}
+
+/* FOOTER */
+footer{
+  background:#603A30;
+  padding:5px;
+  text-align:center;
+}
+
+
+
+/* CART */
+.cart{
+  position:fixed;
+  right:-300px;
+  top:0;
+  width:300px;
+  height:100%;
+  background:white;
+  color:black;
+  padding:20px;
+  transition:.3s;
+}
+
+.cart.active{
+  right:0;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>Veloura</h2>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#" onclick="toggleCart()">Cart (<span id="count">0</span>)</a>
+
+    <div class="search-box">
+      <input type="text" placeholder="Search...">
+      <button class="search-btn">🔍</button>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="slide" style="background-image:url('https://i.pinimg.com/1200x/36/fb/0f/36fb0f854f6e3b10a9faf9ddbb755240.jpg')"></div>
+
+    <div class="slide" style="background-image:url('https://i.pinimg.com/1200x/2d/ef/13/2def133ca62d980d4ed5f8030ad2cf31.jpg')"></div>
+  <div class="slide active" style="background-image:url('https://i.pinimg.com/1200x/3f/ee/55/3fee556c82b77c56325151eccfe10989.jpg')"></div>
+  <div class="slide" style="background-image:url('https://i.pinimg.com/1200x/58/0a/b5/580ab588ce28ecfeffe48580d8487969.jpg')"></div>
+ </section>
+
+<!-- GENDER -->
+<section class="gender">
+  <div class="gender-card"><img src="https://i.pinimg.com/1200x/17/8c/26/178c26233dff62cf43fbbefd032739cf.jpg"><h2>WOMEN</h2></div>
+  <div class="gender-card"><img src="https://i.pinimg.com/736x/f2/cc/5d/f2cc5d6be1d2afb5ed594c255d65d7a6.jpg"><h2>MEN</h2></div>
+  <div class="gender-card"><img src="https://i.pinimg.com/736x/48/e1/10/48e110685343a62680ac5699ea922fe7.jpg"><h2>KIDS</h2></div>
+  <div class="gender-card"><img src="https://i.pinimg.com/736x/92/ba/21/92ba21bfa702ba2a55449b705a21e848.jpg"><h2>ACCESSORIES</h2></div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+  <h2>FEATURED</h2>
+
+  <div class="product-container">
+    <div class="card"><img src="https://i.pinimg.com/736x/eb/8b/0d/eb8b0d55f0b02b9b85b3123a8773c5e7.jpg"><h3> Dress </h3>
+        <p>₹999</p>
+        <button class="btn-main" 
+        onclick="addToCart(999)">Add</button></div>
+    <div class="card"><img src="https://i.pinimg.com/736x/c2/41/69/c24169624e192a2e35fe4bdb75751825.jpg"><h3>Top</h3>
+        <p> ₹699</p>
+        <button class="btn-main"
+         onclick="addToCart(699)">Add</button></div>
+    <div class="card"><img src="https://i.pinimg.com/736x/63/0b/46/630b462009de310e525fc16876800ed2.jpg"><h3>Skirt </h3>
+        <p>₹899</p>
+        <button class="btn-main"
+        onclick="addToCart(899)">Add</button></div>
+    <div class="card"><img src="https://i.pinimg.com/736x/36/3f/0c/363f0c13f6f49fdbf53482bb64d32a0f.jpg"><h3>Jacket </h3>
+        <p>₹1499</p>
+        <button class="btn-main"
+         onclick="addToCart(1499)">Add</button></div>
+  </div>
+</section>
+
+<!-- GRID -->
+<section class="grid">
+  <div class="grid-box"><img src="https://i.pinimg.com/736x/57/54/a9/5754a9dfdfdbeb691595336eb2ad7ec7.jpg"><h3>DRESSES</h3></div>
+  <div class="grid-box"><img src="https://i.pinimg.com/736x/bc/a1/38/bca13828684ec9b829ed09f95ee15a00.jpg"><h3>TOPS</h3></div>
+  <div class="grid-box"><img src="https://i.pinimg.com/736x/86/f2/43/86f2437ed9bab281a636959158b86182.jpg"><h3>DENIM</h3></div>
+  <div class="grid-box"><img src="https://i.pinimg.com/1200x/71/7c/8f/717c8fe52d024558f3dd4ecdfb593c9e.jpg"><h3>ACCESSORIES</h3></div>
+  <div class="grid-box"><img src="https://i.pinimg.com/736x/e0/0b/ed/e00bedbc7c84b50c254eaeec8dd07fa0.jpg"><h3>JACKETS</h3></div>
+  <div class="grid-box"><img src="https://i.pinimg.com/1200x/6b/8b/3c/6b8b3c8a26187c612f19f61dbd9b7376.jpg"><h3>BAGS</h3></div>
+  <div class="grid-box"><img src="https://i.pinimg.com/1200x/97/ba/7d/97ba7d7886b4aa6a34de3d1f83953c07.jpg"><h3>SKIRTS</h3></div>
+  <div class="grid-box"><img src="https://i.pinimg.com/736x/89/b9/5d/89b95d0702492b85f7697fc1cb274a3a.jpg"><h3>TROUSERS</h3></div>
+</section>
+
+<!-- SALE -->
+<section class="sale">
+  <img src="https://i.pinimg.com/1200x/75/1d/2b/751d2b30f041d6a7ec336dbdef797311.jpg">
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <h2>Our Services</h2>
+  <div class="service-container">
+    <div class="service-box">🚚 Free Delivery</div>
+    <div class="service-box">💳 Secure Payment</div>
+    <div class="service-box">🔄 Easy Returns</div>
+    <div class="service-box">📞 24/7 Support</div>
+  </div>
+</section>
+
+<!-- HELP -->
+<section class="helpdesk">
+  <div class="help-container">
+    <div>
+      <h2>Need Help?</h2>
+      <p>We’re here to assist you.</p>
+       
+    </div>
+
+    <div class="help-links">
+      <a href="#">Help Center</a>
+      <a href="#">Contact</a>
+      <a href="#">Tracking</a>
+      <a href="#">FAQs</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <h3>Veloura</h3>
+  <h5>© 2026 Veloura. All Rights Reserved.</h5>
+  
+</footer>
+
+<!-- CART -->
+<div class="cart" id="cart">
+  <h3>Cart</h3>
+  <p>Total: ₹<span id="total">0</span></p>
+  <button onclick="toggleCart()">Close</button>
+</div>
+
+<script>
+let total=0;
+
+function addToCart(price){
+  total+=price;
+  document.getElementById("total").innerText=total;
+  document.getElementById("count").innerText++;
+}
+
+function toggleCart(){
+  document.getElementById("cart").classList.toggle("active");
+}
+
+/* SLIDER */
+let slides=document.querySelectorAll(".slide");
+let index=0;
+
+setInterval(()=>{
+  slides[index].classList.remove("active");
+  index=(index+1)%slides.length;
+  slides[index].classList.add("active");
+},3000);
+</script>
+
+</body>
+</html>
